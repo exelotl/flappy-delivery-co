@@ -1,0 +1,34 @@
+/* Skullboy font by ChevyRay */
+@font-face {
+	font-family: Skullboy;
+	src: url("assets/Skullboy.otf");
+}
+body {
+	background: #000;
+	font-family: 'Skullboy', sans-serif;
+	font-size: 16px;
+	line-height: 12px;
+}
+#root {
+	background: #444;
+	border: 1px solid;
+	overflow: hidden;
+	position: relative;
+	width: 320px;
+	height: 180px;
+	transform: translate(50%, 50%) scale(2.0);
+}
+#root, #root * {
+	user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: -webkit-optimize-contrast;
+	image-rendering: crisp-edges;
+	image-rendering: pixelated;
+}
+.actor, .scene {
+	position: absolute;
+	transform: translateZ(0); /* hint to the browser to let the GPU handle this */
+}
