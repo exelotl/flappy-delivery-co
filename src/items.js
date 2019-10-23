@@ -132,10 +132,12 @@ export class Boombox extends Item {
 		super.removed()
 	}
 	takeoff() {
-		boomboxMusic.play()
+		if (!boomboxMusic.playing()) {
+			boomboxMusic.play()
+		}
 	}
 	land() {
-		boomboxMusic.pause()
+		boomboxMusic.stop()
 	}
 }
 

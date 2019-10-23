@@ -1,11 +1,15 @@
 import './style.css'
 import GameScene from './gamescene'
 import { preload } from './assets'
-
-preload()
+import Preloader from './preloader'
 
 let root = document.getElementById('root')
-let scene = new GameScene(root)
+let scene = new Preloader(root, startGame)
+
+function startGame() {
+	scene.destroy()
+	scene = new GameScene(root)
+}
 
 function flap(e) {
 	e.preventDefault()
@@ -14,15 +18,33 @@ function flap(e) {
 	}
 }
 
-// spacebar to jump / advance etc.
-document.onkeydown = (e) => {
-	if (e.keyCode == 32) {
+let touchControls = false
+
+// touch controls
+document.ontouchstart = e => {
+	touchControls = true
+	console.log('touch flap')
+	flap(e)
+}
+
+// mouse controls
+document.onmousedown = e => {
+	if (touchControls) {
+		e.preventDefault()
+		console.log('bailing due to touch controls')
+	} else {
+		console.log('mouse flap')
 		flap(e)
 	}
 }
 
-// touch controls:
-document.ontouchstart = flap
+// keyboard controls
+document.onkeydown = (e) => {
+	if (e.keyCode == 32) {
+		console.log('keyboard flap')
+		flap(e)
+	}
+}
 
 // fixed timestep game loop, where update is called 60 times a second
 let timestep = 1/60

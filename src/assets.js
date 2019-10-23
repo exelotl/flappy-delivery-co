@@ -1,7 +1,13 @@
 
+// Images
+// ------
+
+// fill this with images so the browser is forced to keep them available in memory
+const imgCache = []
+
 // surely it's possible to use FuseBox to generate this list??
 // but I guess this will do
-const imgList =[
+const imgList = [
 	'background.png',
 	'bag-of-money.png',
 	'bird.png',
@@ -27,33 +33,79 @@ const imgList =[
 	'water.png',
 ]
 
-// we fill this with images so the browser is forced to keep them available in memory
-const cache = []
 
-export function preload() {
-	for (let name in imgList) {
-		let image = document.createElement('img')
-		image.src = `assets/${name}`
-		cache.push(image)
-	}
+// Audio
+// -----
+
+import {Howl, Howler} from 'howler'
+
+const sounds = []
+
+function Sound(settings) {
+	settings.preload = false
+	let howl = new Howl(settings)
+	sounds.push(howl)
+	return howl
 }
 
-// audio can be played directly through these elements, just import them and call play()
+// audio can be played directly through these objects, just import them and call play()
+export const boomboxMusic = Sound({
+	src: 'assets/detune-filtered.ogg',
+	html5: true
+})
+export const flapSfx = Sound({
+	src: 'assets/flap.wav',
+	volume: 0.5,
+})
+export const blipSfx = Sound({
+	src: 'assets/blip.wav',
+	loop: true,
+})
+export const deathSfx = Sound({
+	src: 'assets/death.wav',
+})
 
-export const boomboxMusic = document.createElement('audio')
-boomboxMusic.src = 'assets/detune-filtered.ogg'
-boomboxMusic.load()
 
-export const flapSfx = document.createElement('audio')
-flapSfx.src = 'assets/flap.wav'
-flapSfx.volume = 0.5
-flapSfx.load()
+// Preloading
+// ----------
 
-export const blipSfx = document.createElement('audio')
-blipSfx.src = 'assets/blip.wav'
-blipSfx.loop = true
-blipSfx.load()
+import * as FontFaceObserver from 'fontfaceobserver'
 
-export const deathSfx = document.createElement('audio')
-deathSfx.src = 'assets/death.wav'
-deathSfx.load()
+let totalAssets = 0
+let loadedAssets = 0
+
+export function preload(onLoad) {
+	
+	// font
+	totalAssets++
+	let font = new FontFaceObserver('Skullboy')
+	font.load().then(() => {
+		loadedAssets++
+		onLoad('font', font, loadedAssets, totalAssets)
+	}, (err) => {
+	})
+	
+	// sounds
+	for (let howl of sounds) {
+		totalAssets++
+		howl.on('load', () => {
+			loadedAssets++
+			onLoad('sound', howl, loadedAssets, totalAssets)
+		})
+		howl.load()
+	}
+	
+	// images
+	for (let name of imgList) {
+		let image = document.createElement('img')
+		image.src = `assets/${name}`
+		totalAssets++
+		image.onload = () => {
+			loadedAssets++
+			imgCache.push(image)
+			onLoad('image', image, loadedAssets, totalAssets)
+		}
+	}
+	
+	
+}

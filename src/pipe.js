@@ -1,4 +1,4 @@
-import { Actor } from "./engine"
+import { Actor } from './engine'
 
 export default class Pipe extends Actor {
 	
@@ -10,7 +10,7 @@ export default class Pipe extends Actor {
 	}
 	
 	update() {
-		// any object that wants to deadly to the bird, should emit this event every frame.
+		// any object that wants to be deadly to the bird, should emit this event every frame.
 		this.emit('test-collision', this)
 	}
 	

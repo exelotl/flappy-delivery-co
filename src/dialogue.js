@@ -1,10 +1,11 @@
-import { Actor } from "./engine"
-import { playBlipSfx, blipSfx } from "./assets"
+import { Actor } from './engine'
+import { playBlipSfx, blipSfx } from './assets'
 
 // display text to the screen, to make characters talk
 // you can use this to queue actions
 export default class Dialogue extends Actor {
 	constructor() {
+		super()
 		this.div(298, 36)
 		this.el.classList.add('dialogue')
 		this.el.style.padding = '2px'
@@ -55,7 +56,7 @@ export default class Dialogue extends Actor {
 		this.str = text
 		this.revealCount = -1
 		this.revealDelay = 0
-		blipSfx.loop = true
+		blipSfx.loop(true)
 		blipSfx.play()
 	}
 	
@@ -81,7 +82,7 @@ export default class Dialogue extends Actor {
 			this.textEl.innerText = this.str.substr(0, this.revealCount)
 			this.hiddenTextEl.innerText = this.str.substring(this.revealCount)
 			if (this.textRevealed()) {
-				blipSfx.loop = false
+				blipSfx.loop(false)
 			}
 		}
 	}

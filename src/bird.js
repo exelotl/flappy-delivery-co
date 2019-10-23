@@ -90,9 +90,10 @@ export default class Bird extends Actor {
 			if (this.scene.item) {
 				this.vy += this.scene.item.weight
 			}
-			if (this.y < -4 || this.y > 160) {
-				this.emit('bird-crash')
-			}
+			// limit height
+			if (this.y < -40) this.y = -40
+			// die if we went too low
+			if (this.y > 160) this.emit('bird-crash')
 			break
 		
 		case 'falling':

@@ -28,6 +28,10 @@ export class Scene {
 		this.listeners = {}  // mapping from event-name to array of functions
 	}
 	
+	destroy () {
+		this.root.removeChild(this.el)
+	}
+	
 	add(...actors) {
 		for (let actor of actors) {
 			this.addList.push(actor)			
@@ -145,7 +149,7 @@ export class Scene {
 // if you want the actor to be visible, make sure 'el' is defined before adding it to the stage
 export class Actor {
 	
-	constructor (x, y) {
+	constructor (x=0, y=0) {
 		this.scene = null
 		this.el = null
 		this.x = x

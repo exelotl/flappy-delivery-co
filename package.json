@@ -9,9 +9,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "fuse-box": "^2.5.0-beta.1",
-    "typescript": "^2.6.2",
-    "uglify-es": "^3.3.3"
+    "fuse-box": "^3.7.1",
+    "terser": "^4.3.9",
+    "typescript": "^3.6.4",
+    "uglify-js": "^3.6.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "fontfaceobserver": "^2.1.0",
+    "howler": "^2.1.2"
+  }
 }

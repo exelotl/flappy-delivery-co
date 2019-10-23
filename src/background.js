@@ -3,6 +3,7 @@ import {Actor} from './engine'
 // a repeating background with parallax (finite size)
 export class Background extends Actor {
 	constructor(x,y,w,h, src, zIndex, parallax) {
+		super()
 		this.div(w,h)
 		this.baseX = x
 		this.baseY = y
