@@ -5,7 +5,7 @@ import { boomboxMusic } from './assets'
 
 class Item extends Actor {
 	constructor() {
-		super(0,0)
+		super()
 		this.weight = 0   // how much to add to the bird's gravity
 		this.offsetX = 0  // to line up the centre of the item with the bird's feet
 		this.offsetY = 0  // how much to displace the bird
@@ -45,6 +45,8 @@ class Item extends Actor {
 		let bird = this.scene.bird
 		if (bird) {
 			bird.y -= this.offsetY
+			this.x = bird.feetX() + this.offsetX
+			this.y = bird.feetY()
 		}
 	}
 	update() {

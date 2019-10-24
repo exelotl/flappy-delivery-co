@@ -23,7 +23,6 @@ let touchControls = false
 // touch controls
 document.ontouchstart = e => {
 	touchControls = true
-	console.log('touch flap')
 	flap(e)
 }
 
@@ -31,9 +30,7 @@ document.ontouchstart = e => {
 document.onmousedown = e => {
 	if (touchControls) {
 		e.preventDefault()
-		console.log('bailing due to touch controls')
 	} else {
-		console.log('mouse flap')
 		flap(e)
 	}
 }
@@ -41,7 +38,6 @@ document.onmousedown = e => {
 // keyboard controls
 document.onkeydown = (e) => {
 	if (e.keyCode == 32) {
-		console.log('keyboard flap')
 		flap(e)
 	}
 }

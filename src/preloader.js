@@ -20,31 +20,26 @@ export default class Preloader extends Scene {
 		
 		let barFront = new Actor(barX, barY)
 		barFront.div(barWidth, barHeight)
-		barFront.el.style.background = '#333'
+		barFront.el.style.background = '#111'
 		this.add(barFront)
 		
-		let playText = new Actor(120, 100)
-		playText.div(80, 20)
+		let playText = new Actor(110, 100)
+		playText.div(100, 20)
 		playText.el.style.color = '#fff'
 		playText.el.style.textAlign = 'center'
-		playText.el.innerText = 'space to start'
+		playText.el.innerText = 'SPACE or TAP to start'
 		
 		preload((type, item, loadedAssets, totalAssets) => {
 			console.log(`[${loadedAssets}/${totalAssets}]`, item)
-			let w = Math.floor(barWidth * loadedAssets/totalAssets)
-			barFront.el.style.width = `${barWidth-w}px`
-			barFront.x = barX + w
+			
+			let width = Math.floor(barWidth * loadedAssets/totalAssets)
+			barFront.el.style.width = `${barWidth-width}px`
+			barFront.x = barX + width
 			
 			if (loadedAssets === totalAssets) {
-				// done
 				this.add(playText)
-				
 				this.userInputAllowed = true
-				
-				// when received input, start the game
-				this.on('flap', () => {
-					callback()
-				})
+				this.on('flap', () => callback()) // when received input, start the game
 			}
 		})
 	}
