@@ -50,7 +50,7 @@ function Sound(settings) {
 
 // audio can be played directly through these objects, just import them and call play()
 export const boomboxMusic = Sound({
-	src: 'assets/detune-filtered.ogg',
+	src: ['assets/detune-filtered.ogg', 'assets/detune_filtered.mp3'],
 	html5: true
 })
 export const flapSfx = Sound({

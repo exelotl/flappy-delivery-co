@@ -28,7 +28,7 @@ fuse.bundle('app')
 	.instructions('>index.js')
 
 Sparky.task('watch-assets', () => {
-	return Sparky.watch('assets/*.(png|otf|ogg|wav)').dest('build/assets/$name')
+	return Sparky.watch('assets/*.(png|otf|ogg|mp3|wav)').dest('build/assets/$name')
 })
 
 // I thought the CSS plugin would do this job but oh well...

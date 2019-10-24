@@ -3,6 +3,9 @@
 	font-family: Skullboy;
 	src: url("assets/Skullboy.otf");
 }
+* {
+	touch-action: manipulation; /* prevent double-tap zoom*/
+}
 body {
 	background: #000;
 	font-family: 'Skullboy', sans-serif;
