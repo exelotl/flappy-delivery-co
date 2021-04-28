@@ -2,7 +2,7 @@
 
 [play here](https://exelo.tl/misc/flappy-delivery-co/)
 
-This is a small game I made in 5 days for a job interview in early 2017. 
+This is a small game I made in 5 days for a job interview in early 2018.
 
 It's a flappy bird with a colourful cast of characters and a variety of items!
 
